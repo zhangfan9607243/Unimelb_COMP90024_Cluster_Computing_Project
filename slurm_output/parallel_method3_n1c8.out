@@ -1,0 +1,76 @@
+Method: Split the files into 8 parts and read in parallel, but not process in parallel.
+
+Mid Time Check (After Read): Time used: 194.6 seconds.
+End Time Check (After Summary): Time used: 206.97 seconds.
+
+## Final Result:
+
+1. Count number of tweets made in greater capital cities: 
+Greater Capital City          		Number of Tweets Made         
+2gmel (Greater Melbourne)     		2267051                       
+1gsyd (Greater Sydney)        		2114698                       
+3gbri (Greater Brisbane)      		855448                        
+5gper (Greater Perth)         		589115                        
+4gade (Greater Adelaide)      		451517                        
+6ghob (Greater Hobart)        		90053                         
+
+2. Count number of tweets made by different authors: 
+Rank                		Author Id           		Number of Tweets Made
+#1                  		1498063511204761601 		68477               
+#2                  		1089023364973219840 		28128               
+#3                  		826332877457481728  		27718               
+#4                  		1250331934242123776 		25350               
+#5                  		1423662808311287813 		21034               
+#6                  		1183144981252280322 		20765               
+#7                  		1270672820792508417 		20503               
+#8                  		820431428835885059  		20063               
+#9                  		778785859030003712  		19403               
+#10                 		1104295492433764353 		18781               
+
+3. Authors that made tweeted in the most Greater Capital cities: 
+Rank                		Author Id           		Number of Unique City Locations and #Tweets
+#1                  		3686036533          		6 (#2358 tweets - 1547gmel, 403gsyd, 186gper, 91gbri, 84ghob, 47gade)
+#2                  		1429984556451389440 		6 (#1894 tweets - 1868gmel, 10gsyd, 7gper, 6gbri, 2gade, 1ghob)
+#3                  		17285408            		6 (#1162 tweets - 1041gsyd, 60gmel, 40gbri, 11ghob, 7gper, 3gade)
+#4                  		702290904460169216  		6 (#1058 tweets - 288gsyd, 246gmel, 219gbri, 151gper, 114gade, 40ghob)
+#5                  		1170284820406005760 		6 (#1011 tweets - 945gmel, 30gsyd, 16gbri, 10gade, 9ghob, 1gper)
+#6                  		90997862            		6 (#754 tweets - 589gsyd, 89gmel, 47gper, 18gade, 10ghob, 1gbri)
+#7                  		175051572           		6 (#625 tweets - 591gmel, 20gsyd, 5gper, 4ghob, 3gade, 2gbri)
+#8                  		272293784           		6 (#501 tweets - 352gmel, 138gsyd, 6gade, 2gper, 2gbri, 1ghob)
+#9                  		87188071            		6 (#351 tweets - 108gsyd, 84gmel, 64gbri, 51gper, 29gade, 15ghob)
+#10                 		607969713           		6 (#252 tweets - 148gsyd, 52gmel, 32gade, 8gbri, 7gper, 5ghob)
+
+
+real	3m29.268s
+user	18m23.694s
+sys	0m29.525s
+Job ID           : 46169856
+Cluster          : spartan
+User/Project     : zhangf7/comp90024
+Nodes            : 1
+Wall-clock time  : 00:03:41 / 12:00:00
+
+Displaying overall resources usage from 2023-04-07 16:09:13 to 2023-04-07 16:12:54:
+
+NODE            CPU#        TOT%   ( USR   / SYS   / WIO   / IDLE  ) 
+
+spartan-bm060 : 
+                CPU# 1    : 69.3   (  65.3 /   4.1 /   0.0 /  30.6 ) 
+                CPU# 2    : 61.6   (  59.7 /   1.9 /   0.0 /  38.4 ) 
+                CPU# 3    : 69.4   (  68.2 /   1.2 /   0.0 /  30.6 ) 
+                CPU# 4    : 74.3   (  70.1 /   4.3 /   0.0 /  25.6 ) 
+                CPU# 5    : 60.3   (  58.2 /   2.1 /   0.0 /  39.7 ) 
+                CPU# 6    : 72.0   (  70.7 /   1.3 /   0.0 /  28.0 ) 
+                CPU# 7    : 83.3   (  82.0 /   1.3 /   0.0 /  16.7 ) 
+                CPU# 8    : 41.1   (  39.5 /   1.6 /   0.0 /  58.9 ) 
+
+
+Allocated CPUs            : 8    
+  CPUs with usage <25%    : 0    
+  CPUs with usage <50%    : 1    
+  CPUs with usage >50%    : 7    
+
+Memory used (RAM)         : 8.5%  [2733MB of 32000MB]
+
+--------------------------------------------
+
