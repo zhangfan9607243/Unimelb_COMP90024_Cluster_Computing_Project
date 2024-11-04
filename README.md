@@ -4,12 +4,16 @@
 Thanks to the Unimelb COMP90024 2023S1 teaching team for providing this project opportunity and to the Unimelb SPARTAN HPC facility for providing computational resources.
 
 ## Project Introduction
-This project implements a parallelized application for analyzing Twitter data, utilizing the University of Melbourne's High-Performance Computing (HPC) facility, SPARTAN. 
+Nowadays, social network platforms create massive amounts of data every day. It will be a challenge to deal with such a large amount of data. One possible approach is to process the data in parallel.
+
+In this project, we implemented a parallelized application for analyzing Twitter data, utilizing the University of Melbourne's High-Performance Computing (HPC) facility, SPARTAN. 
 
 The main objectives of this assignment are, given a JSON file that contains Tweets and a `sal.json` dictionary that maps suburbs to their corresponding Greater Capital cities, to:
 - Task 1: Count the number of different tweets made in the Greater Capital cities of Australia.
 - Task 2: Identify the Twitter accounts that have made the most tweets.
 - Task 3: Identify the users that have tweeted from the most different Greater Capital cities.
+
+The programming language used is Python, with parallel computing achieved by the `mpi4py` package. The performance of our main parallel method is compared with a baseline method that involves no parallel execution, and two alternative parallel methods that we have tried and proved to perform worse than our main method.
 
 ## File Descriptions
 The following is a detailed instructions to the files & paths:
