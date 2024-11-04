@@ -56,8 +56,8 @@ Then, these data files will be located in the `/data/` path (although these are 
 ### 2. If You CANNOT Access Unimelb SPARTAN HPC (Run Locally)
 #### (1) Data Preparation
 First, you can access the data through the following ways.
-  * `sal.json`: Already contained in the `\data\` of this repository.
-  * `tinyTwitter.json`: Already contained in the `\data\` of this repository.
+  * `sal.json`: Already contained in the `/data/` of this repository.
+  * `tinyTwitter.json`: Already contained in the `/data/` of this repository.
   * `smallTwitter.json`: Access through the link: .
   * `bigTwitter.json`: Access through the link: .
 
