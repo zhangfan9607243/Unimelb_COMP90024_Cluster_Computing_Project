@@ -17,31 +17,31 @@ The programming language used is Python, with parallel computing achieved by the
 
 ## File Descriptions
 The following is a detailed instructions to the files & paths:
-  * `/data/`:
-    * `sal.json`: This file is a map dictionary that contains the suburb names in Australia and which great capital city they belong to.
-    * `tinyTwitter.json`: The Twitter data file (1.5Mb).
-    * `smallTwitter.json`: The Twitter data file (242Mb).
-    * `bigTwitter.json`: The Twitter data file (18.74Gb).
-  * `/slurm_files/`: The shell file to submit jobs on SPARTAN HPC.
-    * `non_parallel.slurm`
-    * `parallel_method1_n1c8.slurm`
-    * `parallel_method1_n2c8.slurm`
-    * `parallel_method2_n1c8.slurm`
-    * `parallel_method2_n2c8.slurm`
-    * `parallel_method3_n1c8.slurm`
-    * `parallel_method3_n2c8.slurm`
-  * `/slurm_outputs/`: The job output from SPARTAN HPC.
-    * `non_parallel.out`
-    * `parallel_method1_n1c8.out`
-    * `parallel_method1_n2c8.out`
-    * `parallel_method2_n1c8.out`
-    * `parallel_method2_n2c8.out`
-    * `parallel_method3_n1c8.out`
-    * `parallel_method3_n2c8.out`
-  * `/non_parallel.py`: This is the source code of our baseline sequential execution method.
-  * `/parallel_method1.py`: This is the source code of an alternative parallel method, which reads data by a single core but processes data in parallel.
-  * `/parallel_method2.py`: This is the source code of an alternative parallel method, which reads data in parallel by a signal for cores.
-  * `/parallel_method3.py`: This is the source code of our main parallel method, which reads in parallel by splitting the data file.
+* `/data/`:
+  * `sal.json`: This file is a map dictionary that contains the suburb names in Australia and which great capital city they belong to.
+  * `tinyTwitter.json`: The Twitter data file (1.5Mb).
+  * `smallTwitter.json`: The Twitter data file (242Mb).
+  * `bigTwitter.json`: The Twitter data file (18.74Gb).
+* `/slurm_files/`: The shell file to submit jobs on SPARTAN HPC.
+  * `non_parallel.slurm`
+  * `parallel_method1_n1c8.slurm`
+  * `parallel_method1_n2c8.slurm`
+  * `parallel_method2_n1c8.slurm`
+  * `parallel_method2_n2c8.slurm`
+  * `parallel_method3_n1c8.slurm`
+  * `parallel_method3_n2c8.slurm`
+* `/slurm_outputs/`: The job output from SPARTAN HPC.
+  * `non_parallel.out`
+  * `parallel_method1_n1c8.out`
+  * `parallel_method1_n2c8.out`
+  * `parallel_method2_n1c8.out`
+  * `parallel_method2_n2c8.out`
+  * `parallel_method3_n1c8.out`
+  * `parallel_method3_n2c8.out`
+* `/non_parallel.py`: This is the source code of our baseline sequential execution method.
+* `/parallel_method1.py`: This is the source code of an alternative parallel method, which reads data by a single core but processes data in parallel.
+* `/parallel_method2.py`: This is the source code of an alternative parallel method, which reads data in parallel by a signal for cores.
+* `/parallel_method3.py`: This is the source code of our main parallel method, which reads in parallel by splitting the data file.
 
 
 ## Code Instruction
@@ -58,7 +58,40 @@ ln –s /data/projects/COMP90024/sal.json
 Then, these data files will be located in the `/data/` path (although these are symbolic links, they do not affect usage.).
 
 #### (2) Program Execution
+There are 7 slurm files in the path `/slurm_files/`, which are shell file to submit jobs on SPARTAN HPC. 
 
+The following shows the contents of the file `parallel_method3_n2c8.slurm`, as an example
+```
+#!/bin/bash
+#SBATCH --nodes=2
+#SBATCH --ntasks=8
+#SBATCH --time=0-01:00:00
+
+module load mpi4py/3.0.2-timed-pingpong
+module load python/3.7.4
+module load numpy/1.18.0-python-3.7.4
+
+time mpiexec -n 8 python3 parallel_method3.py
+my-job-stats -a -n -s
+```
+
+In this file:
+* `#!/bin/bash`: This indicates that the script should be run using the Bash shell.
+* `#SBATCH --nodes=2`: This specifies that the job requires 2 nodes (computers) in the cluster.
+* `#SBATCH --ntasks=8`: This indicates that the job will use a total of 8 tasks (processes) across the nodes.
+* `#SBATCH --time=0-01:00:00`: This sets a maximum runtime of 1 hour for the job, formatted as days-hours:minutes:seconds
+* `module load mpi4py/3.0.2-timed-pingpong`: This loads a specific version of the mpi4py module, which is a Python package for MPI.
+* `module load python/3.7.4`: This loads a specific version of Python (3.7.4) to be used for running the script.
+* `module load numpy/1.18.0-python-3.7.4`: This loads a specific version of NumPy, a library for numerical computing in Python.
+* `time mpiexec -n 8 python3 parallel_method3.py`: This runs the parallel_method3.py script using MPI, with 8 processes, and measures the execution time.
+* `my-job-stats -a -n -s`: This command requests that the output includes the task status as well.
+
+Then, to submit jobs on SPARTAN HPC, we should use the following command at SPARTAN login node:
+```
+$ sbatch myfirstjob.slurm
+```
+
+The submission of other jobs is the same.
 
 ### 2. If You CANNOT Access Unimelb SPARTAN HPC (Run Locally)
 #### (1) Data Preparation
@@ -82,10 +115,10 @@ $ time mpirun --oversubscribe -np 8 python file_name.py
 ```
 
 In this command:
-  * `time`: This command can help you record the runtime.
-  * `mpirun`: This is the command used to launch MPI (Message Passing Interface) applications.
-  * `--oversubscribe`: This option allows you to start more processes than there are available slots (or resources) in the system. In other words, even if your system has fewer cores than the number of processes you want to run, it will still allow you to launch them.
-  * `-np 8`: This option specifies the number of processes to start, which is 8 in this case. You cannot change this number because my program has already specified the tasks for each of the 8 threads.
-  * `python file_name.py`: This indicates the Python script you want to run. You can choose from `parallel_method1.py`, `parallel_method2.py`, and `parallel_method3.py`.
+* `time`: This command can help you record the runtime.
+* `mpirun`: This is the command used to launch MPI (Message Passing Interface) applications.
+* `--oversubscribe`: This option allows you to start more processes than there are available slots (or resources) in the system. In other words, even if your system has fewer cores than the number of processes you want to run, it will still allow you to launch them.
+* `-np 8`: This option specifies the number of processes to start, which is 8 in this case. You cannot change this number because my program has already specified the tasks for each of the 8 threads.
+* `python file_name.py`: This indicates the Python script you want to run. You can choose from `parallel_method1.py`, `parallel_method2.py`, and `parallel_method3.py`.
 
 Note that you don't need to run `non_parallel.py` with the above command; you can simply run it using command `python non_parallel.py`, as this file is not set up for multi-threading.
