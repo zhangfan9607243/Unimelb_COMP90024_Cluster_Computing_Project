@@ -62,7 +62,7 @@ Then, these data files will be located in the `/data/` path (although these are 
 First, you can access the data through the following ways.
   * `sal.json`: Already contained in the `/data/` of this repository.
   * `tinyTwitter.json`: Already contained in the `/data/` of this repository.
-  * `smallTwitter.json`: Access through the link: .
-  * `bigTwitter.json`: Access through the link: .
+  * `smallTwitter.json`: Access through the link: https://pan.baidu.com/s/1ZqBevgcc4QxEZgmcLDvnPw?pwd=1234.
+  * `bigTwitter.json`: Access through the link: https://pan.baidu.com/s/1ZqBevgcc4QxEZgmcLDvnPw?pwd=1234.
 
 Then, you can put these data files in the `/data/` path of the cloned repository on your local device.
