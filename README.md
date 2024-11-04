@@ -42,5 +42,23 @@ The following is a detailed instructions to the files & paths:
 
 ## Code Instruction
 ### 1. If You CAN Access Unimelb SPARTAN HPC
+#### (1) Data Preparation
+In your own SPARTAN user directory, change directory to the `/data/` path of this project. Then, make a symbolic link to these files on SPARTAN through the following commands:
+```
+ln –s /data/projects/COMP90024/bigTwitter.json
+ln –s /data/projects/COMP90024/smallTwitter.json
+ln –s /data/projects/COMP90024/tinyTwitter.json
+ln –s /data/projects/COMP90024/sal.json
+```
 
-### 2. If You CANNOT Access Unimelb SPARTAN HPC
+Then, these data files will be located in the `/data/` path (although these are symbolic links, they do not affect usage.).
+
+### 2. If You CANNOT Access Unimelb SPARTAN HPC (Run Locally)
+#### (1) Data Preparation
+First, you can access the data through the following ways.
+  * `sal.json`: Already contained in the `\data\` of this repository.
+  * `tinyTwitter.json`: Already contained in the `\data\` of this repository.
+  * `smallTwitter.json`: Access through the link: .
+  * `bigTwitter.json`: Access through the link: .
+
+Then, you can put these data files in the `/data/` path of the cloned repository on your local device.
