@@ -41,4 +41,6 @@ The following is a detailed instructions to the files & paths:
 
 
 ## Code Instruction
-### 1. IF You ARE 
+### 1. If You CAN Access Unimelb SPARTAN HPC
+
+### 2. If You CANNOT Access Unimelb SPARTAN HPC
