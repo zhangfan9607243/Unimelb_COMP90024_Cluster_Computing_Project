@@ -81,5 +81,5 @@ mpirun --oversubscribe -np 8 python file_name.py
 In this command:
   * `mpirun`: This is the command used to launch MPI (Message Passing Interface) applications.
   * `--oversubscribe`: This option allows you to start more processes than there are available slots (or resources) in the system. In other words, even if your system has fewer cores than the number of processes you want to run, it will still allow you to launch them.
-  * `-np 8`: This option specifies the number of processes to start, which is 8 in this case.
-  * `python parallel_method3.py`: This indicates the Python script you want to run, named parallel_method3.py.
+  * `-np 8`: This option specifies the number of processes to start, which is 8 in this case. You cannot change this number because my program has already specified the tasks for each of the 8 threads.
+  * `python file_name.py`: This indicates the Python script you want to run. You can choose from `/non_parallel.py`, `/parallel_method1.py`, `/parallel_method2.py`, and `/parallel_method3.py`.
