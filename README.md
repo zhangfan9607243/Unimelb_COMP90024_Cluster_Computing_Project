@@ -124,18 +124,19 @@ In this command:
 Note that you don't need to run `non_parallel.py` with the above command; you can simply run it using command `python non_parallel.py`, as this file is not set up for multi-threading.
 
 ## Project Report
-### Performance Overview
+### 1. Performance Overview
 The running time on `bigTwitter.json` of the main parallel method, together with the baseline method and two alternative parallel methods, are presented as below.
 <img width="878" alt="截屏2024-11-04 23 30 16" src="https://github.com/user-attachments/assets/088197fe-78e7-4d2c-ae11-64b9634e8cd4">
 
-### Baseline Method: Sequential Execution (non_parallel.py)
+### 2. Methods
+#### (1) Baseline Method: Sequential Execution (non_parallel.py)
 The idea of sequential execution is simple. Although it does not involve a parallel mechanism, the sequential execution method provides a basic methodology for solving problems in this task.
 
 Firstly, we read the json files, with the suburb file read entirely due to its small size, and the Twitter file read line by line due to its large size. While reading the Twitter file, we only extract objects that we are interested in: pairs of author id and suburb. Then, we count the number of objects we care about by three Python dictionaries corresponding to the three tasks in this assignment. Finally, when the count is over, we process the dictionaries to produce the summary tables.
 
 For the sequential execution method, it can only run on 1 node 1 core resource, which has a 349.37s running time. The sequential execution method will be used as a foundation. All the other methods are modifications based on the sequential execution method, and their performance will be compared with the sequential execution method.
 
-### Main Parallel Method: Read in Parallel by Splitting the Data File (parallel_method3.py)
+#### (2) Main Parallel Method: Read in Parallel by Splitting the Data File (parallel_method3.py)
 The main parallel method has the best performance when comparing other parallel methods we tried. In this part, we will describe this method step by step.
 
 Firstly, our basic idea is to split the large Twitter file into eight parts, then each core reads one part of the file simultaneously. To implement this idea, we should get the whole file size and divide it into eight parts on average, also we need to get the start and end position of each part. Then for each core, we decide which part of the file it should read. The function `seek()` can be applied to find the start position of the part which should be read in this core, the function `tell()` can help us to determine whether it comes to the end of this part during reading steps. For each core, pairs of author id and its suburb from its file part are collected in a list, then only one core is used to gather all the lists from eight cores.
@@ -146,12 +147,12 @@ Then, we do all the subsequent statistics and summary steps, as in sequential ex
 
 This method has the best performance, which runs 206.97s on 1 node 8 cores and 83.78s on 2 node 8 cores. Also, we have the same output as the baseline method. For 1 node 8 cores, the time spent by running this parallel method is 60% of the time spent by running the baseline method. For 2 node 8 cores, the percentage is dropped from 60% to 24%. The code speed increases significantly when using this parallel method, which shows that executing reading file steps in parallel has the best performance to increase the code speed. Therefore, we use this parallel method as our main parallel method.
 
-### Other Parallel Methods 1: Read Data in Parallel by a Signal for Cores (parallel_method2.py)
+#### (3) Other Parallel Methods 1: Read Data in Parallel by a Signal for Cores (parallel_method2.py)
 When we first thought about reading data in parallel, we came up with this method. In this parallel method, all the cores browse the Twitter file but capture objects (pair of author id and suburb) in turn. While browsing the Twitter file, when an object is found, only the core, whose turn it is, captures the object, and all the other cores continuously browse the Twitter file and look for the next object. This can be done by setting a signal suggesting whose turn it is now.
 
 This method does not have a good performance, which runs 525.76s on 1 node 8 cores and 484.07s on 2 node 8 cores, which is even slower than sequential execution, though accelerated by adding nodes. The reason is that, in fact, all the cores have to fully go through the Twitter file, in this method. So, in theory, it cannot be faster than sequential execution. Additionally, compared with single core, when more cores are added, the percentage of usage of a single core will decrease. Therefore, in this case, running in 1 node 8 core has the worst performance.
 
-### Other Parallel Methods 1: Read Data by a Single Core but Process Data in Parallel (parallel_method1.py)
+#### (4) Other Parallel Methods 2: Read Data by a Single Core but Process Data in Parallel (parallel_method1.py)
 When we first thought about parallel execution, we came up with this method. In this parallel method, the read of data from json files is completed by a single core. The other 7 cores are responsible for data processing: 3 cores count the objects and maintain 3 counter dictionaries separately, 3 cores generate the 3 summary tables separately, and 1 core prints the output.
 
 This method does not have a good performance, which runs 375.54s on 1 node 8 cores and 374.31s on 2 node 8 cores. Its running speed is similar to sequential execution and almost not accelerated by adding more nodes. This also suggests that once read from disk into memory, subsequent data processing is not a time-consuming procedure in this case.
