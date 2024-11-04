@@ -1,4 +1,4 @@
-# Unimelb Comp90024 Cluster Computing Project
+# Unimelb COMP90024 Cluster Computing Project
 
 ## Acknowledgments
 Thanks to the Unimelb COMP90024 2023S1 teaching team for providing this project opportunity and to the Unimelb SPARTAN HPC facility for providing computational resources.
@@ -66,3 +66,20 @@ First, you can access the data through the following ways.
   * `bigTwitter.json`: Access through the link: https://pan.baidu.com/s/1ZqBevgcc4QxEZgmcLDvnPw?pwd=1234.
 
 Then, you can put these data files in the `/data/` path of the cloned repository on your local device.
+
+#### (2) Program Execution
+First, please ensure that package `mpi4py` is installed in your Python environment.
+
+Then, in the main four Python files (`/non_parallel.py`, `/parallel_method1.py`, `/parallel_method2.py`, and `/parallel_method3.py`), you can specify the name of the Twitter file to run (`tinyTwitter.json`, `smallTwitter.json`, or `bigTwitter.json`). 
+
+Then, you can run the following command in the terminal.
+
+```
+mpirun --oversubscribe -np 8 python file_name.py
+```
+
+In this command:
+  * `mpirun`: This is the command used to launch MPI (Message Passing Interface) applications.
+  * `--oversubscribe`: This option allows you to start more processes than there are available slots (or resources) in the system. In other words, even if your system has fewer cores than the number of processes you want to run, it will still allow you to launch them.
+  * `-np 8`: This option specifies the number of processes to start, which is 8 in this case.
+  * `python parallel_method3.py`: This indicates the Python script you want to run, named parallel_method3.py.
