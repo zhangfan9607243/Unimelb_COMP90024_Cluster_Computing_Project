@@ -57,6 +57,9 @@ ln –s /data/projects/COMP90024/sal.json
 
 Then, these data files will be located in the `/data/` path (although these are symbolic links, they do not affect usage.).
 
+#### (2) Program Execution
+
+
 ### 2. If You CANNOT Access Unimelb SPARTAN HPC (Run Locally)
 #### (1) Data Preparation
 First, you can access the data through the following ways.
@@ -70,7 +73,7 @@ Then, you can put these data files in the `/data/` path of the cloned repository
 #### (2) Program Execution
 First, please ensure that package `mpi4py` is installed in your Python environment.
 
-Then, in the main four Python files (`/non_parallel.py`, `/parallel_method1.py`, `/parallel_method2.py`, and `/parallel_method3.py`), you can specify the name of the Twitter file to run (`tinyTwitter.json`, `smallTwitter.json`, or `bigTwitter.json`). 
+Then, in the main 3 Python files with parallel programming (`parallel_method1.py`, `parallel_method2.py`, and `parallel_method3.py`), you can specify the name of the Twitter file to run (`tinyTwitter.json`, `smallTwitter.json`, or `bigTwitter.json`). 
 
 Then, you can run the following command in the terminal.
 
@@ -82,4 +85,6 @@ In this command:
   * `mpirun`: This is the command used to launch MPI (Message Passing Interface) applications.
   * `--oversubscribe`: This option allows you to start more processes than there are available slots (or resources) in the system. In other words, even if your system has fewer cores than the number of processes you want to run, it will still allow you to launch them.
   * `-np 8`: This option specifies the number of processes to start, which is 8 in this case. You cannot change this number because my program has already specified the tasks for each of the 8 threads.
-  * `python file_name.py`: This indicates the Python script you want to run. You can choose from `/non_parallel.py`, `/parallel_method1.py`, `/parallel_method2.py`, and `/parallel_method3.py`.
+  * `python file_name.py`: This indicates the Python script you want to run. You can choose from `parallel_method1.py`, `parallel_method2.py`, and `parallel_method3.py`.
+
+Note that you don't need to run `non_parallel.py` with the above command; you can simply run it using `python non_parallel.py`, as this file is not set up for multi-threading.
