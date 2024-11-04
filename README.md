@@ -78,10 +78,11 @@ Then, in the main 3 Python files with parallel programming (`parallel_method1.py
 Then, you can run the following command in the terminal.
 
 ```
-$ mpirun --oversubscribe -np 8 python file_name.py
+$ time mpirun --oversubscribe -np 8 python file_name.py
 ```
 
 In this command:
+  * `time`: This command can help you record the runtime.
   * `mpirun`: This is the command used to launch MPI (Message Passing Interface) applications.
   * `--oversubscribe`: This option allows you to start more processes than there are available slots (or resources) in the system. In other words, even if your system has fewer cores than the number of processes you want to run, it will still allow you to launch them.
   * `-np 8`: This option specifies the number of processes to start, which is 8 in this case. You cannot change this number because my program has already specified the tasks for each of the 8 threads.
