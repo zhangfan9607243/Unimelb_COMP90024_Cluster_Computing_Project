@@ -78,7 +78,7 @@ Then, in the main 3 Python files with parallel programming (`parallel_method1.py
 Then, you can run the following command in the terminal.
 
 ```
-mpirun --oversubscribe -np 8 python file_name.py
+$ mpirun --oversubscribe -np 8 python file_name.py
 ```
 
 In this command:
@@ -87,4 +87,4 @@ In this command:
   * `-np 8`: This option specifies the number of processes to start, which is 8 in this case. You cannot change this number because my program has already specified the tasks for each of the 8 threads.
   * `python file_name.py`: This indicates the Python script you want to run. You can choose from `parallel_method1.py`, `parallel_method2.py`, and `parallel_method3.py`.
 
-Note that you don't need to run `non_parallel.py` with the above command; you can simply run it using `python non_parallel.py`, as this file is not set up for multi-threading.
+Note that you don't need to run `non_parallel.py` with the above command; you can simply run it using command `python non_parallel.py`, as this file is not set up for multi-threading.
